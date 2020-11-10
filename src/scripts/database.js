@@ -13,9 +13,7 @@ const addBookmarks = function (bookmark) {
 };
 
 const storeDeleteBookmark = function (id) {
-  let index = STORE.bookmarks.indexOf(id);
-  STORE.bookmarks.splice(index, 1);
-  console.log(STORE.bookmarks);
+  STORE.bookmarks = STORE.bookmarks.filter(bookmark => bookmark.id != id);
 };
 
 // API MANAGEMENT FUNCTIONS

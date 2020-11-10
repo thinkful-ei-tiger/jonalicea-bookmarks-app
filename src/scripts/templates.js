@@ -1,6 +1,6 @@
 
 const initialBookmarkTemplateView = function (bookmark) {
-  let bookmarkTitle = `<h2><span class="app-link">${bookmark.title}</span></h2>`;
+  let bookmarkTitle = `<a href="#" class="app-link"><h2><span>${bookmark.title}</span></h2></a>`;
   let totalRating = '';
   let i = 0;
   while (bookmark.rating > i) {
@@ -37,14 +37,6 @@ const generateBookmarkHTMLstring = function (bookmarks) {
   return bookmarksString.join('');
 };
 
-const generateFilteredBookmarkHTMLString = function (bookmarks, raiting) {
-
-//   const bookmarksString = bookmarks.map((bookmark) => initialBookmarkTemplateView(bookmark));
-//   console.log(bookmarksString);
-// //   const filteredBookmarksString = bookmarksString.
-//   return bookmarksString.join('');
-};
-
 
 const addNewBookmarkTemplateView = function (){
 
@@ -52,17 +44,26 @@ const addNewBookmarkTemplateView = function (){
   let titleH2 = 'Create Bookmark';
   const bookmarkAdd = `<h2>${titleH2}</h2>
                           <form class="add-new-bookmark">
-                              <input type="text" name="title" id="title" placeholder="Title" pattern="[a-zA-Z0-9_]+.*$" minlength="1" required>
-                              <input type="text" name="url" value="https://" id="url" placeholder="https://website.com" pattern="https://.*|http://.*"  minlength="5" required>
-                              <textarea name="desc" id="desc" placeholder="Description"></textarea>
+                              <div class="error"></div>
+                              <label class="hide-label" for="title">Enter Title</label>
+                              <!-- <input type="text" title="Enter Title" name="title" id="title" placeholder="Enter Title" pattern="[a-zA-Z0-9_]+.*$" minlength="1" required> -->
+                              <input type="text" title="Enter Title" name="title" id="title" placeholder="Enter Title">
+                              <label class="hide-label" for="url">Enter URL</label>
+                              <!-- <input type="text" title="Enter URL" name="url" value="https://" id="url" placeholder="https://website.com" pattern="https://.*|http://.*"  minlength="5" required> -->
+                              <input type="text" title="Enter URL" name="url" value="https://" id="url" placeholder="https://website.com">
+                              <label class="hide-label" for="desc">Enter Description</label>
+                              <textarea title="Enter Description" name="desc" id="desc" placeholder="Enter Description"></textarea>
+
                               <div class="add-raiting">
                                   <fieldset class="rating">
-                                      <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 Stars">5 Stars</label>
-                                      <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 Stars">4 Stars</label>
-                                      <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 Stars">3 Stars</label>
-                                      <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 Stars">2 Stars</label>
-                                      <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 Star">1 Star</label>
+                                  <legend>Enter Rating</legend>
+                                      <input type="radio" id="star5" name="rating" value="5" /><label for="star5">5 Stars</label>
+                                      <input type="radio" id="star4" name="rating" value="4" /><label for="star4">4 Stars</label>
+                                      <input type="radio" id="star3" name="rating" value="3" /><label for="star3">3 Stars</label>
+                                      <input type="radio" id="star2" name="rating" value="2" /><label for="star2">2 Stars</label>
+                                      <input type="radio" id="star1" name="rating" value="1" /><label for="star1">1 Star</label>
                                   </fieldset>
+                              
                               </div>
                                   <button id="save-bookmark">Save 🔖</button>
                                   <button id="cancel-bookmark">Cancel</button>
@@ -82,11 +83,11 @@ const editBookmarkTemplateView = function (){
                               <textarea name="description" id="description" placeholder="Description"></textarea>
                               <div class="add-raiting">
                                   <fieldset class="rating">
-                                      <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 Stars">5 Stars</label>
-                                      <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 Stars">4 Stars</label>
-                                      <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 Stars">3 Stars</label>
-                                      <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 Stars">2 Stars</label>
-                                      <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 Star">1 Star</label>
+                                      <input type="radio" id="star5" name="rating" value="5" /><label for="star5">5 Stars</label>
+                                      <input type="radio" id="star4" name="rating" value="4" /><label for="star4">4 Stars</label>
+                                      <input type="radio" id="star3" name="rating" value="3" /><label for="star3">3 Stars</label>
+                                      <input type="radio" id="star2" name="rating" value="2" /><label for="star2">2 Stars</label>
+                                      <input type="radio" id="star1" name="rating" value="1" /><label for="star1">1 Star</label>
                                   </fieldset>
                               </div>
                                   <button type="submit" id="save-edited-bookmark">Save 🔖</button>
@@ -100,7 +101,6 @@ const editBookmarkTemplateView = function (){
 export default {
   initialBookmarkTemplateView,
   generateBookmarkHTMLstring,
-  generateFilteredBookmarkHTMLString,
   addNewBookmarkTemplateView,
   editBookmarkTemplateView
 };

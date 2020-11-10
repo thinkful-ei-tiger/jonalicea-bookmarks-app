@@ -26,9 +26,23 @@ h3 {
 
 }
 
-.app-link:hover {
+.hide-label {
+    display: none;
+}
+
+legend {
+    display: none;
+}
+
+a:hover h2 {
     cursor: pointer;
     color: tomato;
+}
+
+.app-link:hover, a:hover, a {
+    cursor: pointer;
+    color: tomato;
+    text-decoration: none;
 }
 
 body {
@@ -39,7 +53,7 @@ body {
     /* align-items: center; */
     /* height: 100vh; */
     box-sizing: border-box;
-    background-color: #dbbadb;
+    background-color: #EAD2EA;
     font-size: 1em;
     color: teal;
 }
@@ -173,7 +187,7 @@ fieldset {
     cursor:pointer;
     font-size:200%;
     line-height:1.2;
-    color:#ddd;
+    color: inherit;
     text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);
 }
 

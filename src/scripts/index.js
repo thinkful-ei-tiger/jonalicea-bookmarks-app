@@ -10,6 +10,7 @@ import templates from './templates';
 
 const render = function () {
   const bookmarks = database.STORE.bookmarks;
+  console.log('render');
 
   if(database.STORE.adding === true) {
     const addView = templates.addNewBookmarkTemplateView();
@@ -40,7 +41,7 @@ const filteredBookmarks = function (bookmarks) {
   let filter = database.STORE.filter;
   let filteredBookmarks = [];
   bookmarks.forEach(function (bookmark){
-    if (bookmark.rating == filter) {
+    if (filter <= bookmark.rating) {
       filteredBookmarks.push(bookmark);
     }
     
@@ -63,7 +64,6 @@ const getBookmarkIdFromElement = function (element) {
 const expandBookmarksEventListener = function () {
   $('#all-bookmarks').on('click', '.app-link',  function (event) {
     const id = getBookmarkIdFromElement(event.currentTarget);
-    console.log(event.currentTarget);
     expandedBookmark(id);
     render();
   });
@@ -82,13 +82,28 @@ const submitNewBookmarkEventListener = function () {
   $('main').on('submit', '.add-new-bookmark', function (event){
     event.preventDefault();
     const formElemnet = $('.add-new-bookmark')[0];
-    console.log($('.add-new-bookmark'));
     const jsonData = serializeJson(formElemnet);
     database.createBookmark(jsonData)
-      .then(response => response.json())
+      .then(response => {
+          return response.json();
+      })
       .then((newBookmark) => {
-        database.addBookmarks(newBookmark); 
+        if (newBookmark.message) {
+          $('.error').html(
+            `Something went wrong:
+            "Enter Title" and  "Enter url" Required. Please Use http:// or https:// on "Enter Url"`
+            );
+            console.log(newBookmark.message)
+        } else {
+                  database.addBookmarks(newBookmark); 
         render();
+        }
+
+      })
+      .catch(err => {
+        console.log(err);
+        $('.error').html(`Something went wrong: ${err.message}.`);
+      
       });
     
     // debugger;
@@ -122,16 +137,16 @@ const cancelNewBookmarkEventListener = function (){
 
 const deleteBookmarkEventListener = function() {
   $('main').on('click', '.delete-bookmark', function (event){
+    console.log('delete');
     event.preventDefault();
-    console.log('hey');
     const id = getBookmarkIdFromElement(event.currentTarget);
     database.deleteBookmark(id)
       .then(response => response.json())
       .then(() => {
-        console.log(id);
         database.storeDeleteBookmark(id);
         render();
       });
+      
   });
 };
 
@@ -155,8 +170,6 @@ const app = function (){
       bookmarks.forEach((bookmark) => database.addBookmarks(bookmark));
       render();
     });
-
-  render();
   eventListeners();
 
 };

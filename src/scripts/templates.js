@@ -44,7 +44,7 @@ const addNewBookmarkTemplateView = function (){
   let titleH2 = 'Create Bookmark';
   const bookmarkAdd = `<h2>${titleH2}</h2>
                           <form class="add-new-bookmark">
-                              <div class="error"></div>
+                              <div class="error error-show"></div>
                               <label class="hide-label" for="title">Enter Title</label>
                               <!-- <input type="text" title="Enter Title" name="title" id="title" placeholder="Enter Title" pattern="[a-zA-Z0-9_]+.*$" minlength="1" required> -->
                               <input type="text" title="Enter Title" name="title" id="title" placeholder="Enter Title">

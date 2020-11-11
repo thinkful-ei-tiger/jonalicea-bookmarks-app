@@ -22,10 +22,6 @@ h2 {
     font-family: 'Nunito', sans-serif;
 }
 
-h3 {
-
-}
-
 .hide-label {
     display: none;
 }
@@ -99,6 +95,12 @@ body {
     width: 100%;
     border: 0;
     color: teal;
+    background-color: #fff;
+}
+
+.error {
+    color: tomato;
+    font-style: italic;
     background-color: #fff;
 }
 

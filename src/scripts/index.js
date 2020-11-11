@@ -12,13 +12,13 @@ const render = function () {
   const bookmarks = database.STORE.bookmarks;
   console.log('render');
 
-  if(database.STORE.adding === true) {
+  if (database.STORE.adding === true) {
     const addView = templates.addNewBookmarkTemplateView();
     $('#all-bookmarks').html(addView);
   } else if (database.STORE.editing === true) {
     const addEdit = templates.generateEditBookmarktemplate();
     $('#all-bookmarks').html(addEdit);
-  } else if(database.STORE.filter > 0 ) {
+  } else if (database.STORE.filter > 0) {
     const filtered = filteredBookmarks(bookmarks);
     const bookmarksHTMLString = templates.generateBookmarkHTMLstring(filtered);
     $('#all-bookmarks').html(bookmarksHTMLString);
@@ -31,7 +31,7 @@ const render = function () {
 };
 
 const addBookmarkEventListener = function () {
-  $('#add-bookmark').on('click',  function () {
+  $('#add-bookmark').on('click', function () {
     database.STORE.adding = true;
     render();
   });
@@ -40,11 +40,11 @@ const addBookmarkEventListener = function () {
 const filteredBookmarks = function (bookmarks) {
   let filter = database.STORE.filter;
   let filteredBookmarks = [];
-  bookmarks.forEach(function (bookmark){
+  bookmarks.forEach(function (bookmark) {
     if (filter <= bookmark.rating) {
       filteredBookmarks.push(bookmark);
     }
-    
+
   });
   return filteredBookmarks;
 };
@@ -62,7 +62,7 @@ const getBookmarkIdFromElement = function (element) {
 };
 
 const expandBookmarksEventListener = function () {
-  $('#all-bookmarks').on('click', '.app-link',  function (event) {
+  $('#all-bookmarks').on('click', '.app-link', function (event) {
     const id = getBookmarkIdFromElement(event.currentTarget);
     expandedBookmark(id);
     render();
@@ -79,33 +79,35 @@ function serializeJson(form) {
 }
 
 const submitNewBookmarkEventListener = function () {
-  $('main').on('submit', '.add-new-bookmark', function (event){
+  $('main').on('submit', '.add-new-bookmark', function (event) {
     event.preventDefault();
     const formElemnet = $('.add-new-bookmark')[0];
     const jsonData = serializeJson(formElemnet);
     database.createBookmark(jsonData)
       .then(response => {
-          return response.json();
+        return response.json();
       })
       .then((newBookmark) => {
         if (newBookmark.message) {
+          $('.error').addClass('.error-show');
           $('.error').html(
             `Something went wrong:
             "Enter Title" and  "Enter url" Required. Please Use http:// or https:// on "Enter Url"`
-            );
-            console.log(newBookmark.message)
+          );
+          console.log(newBookmark.message)
         } else {
-                  database.addBookmarks(newBookmark); 
-        render();
+          $('.error').toggle('.error-show')
+          database.addBookmarks(newBookmark);
+          render();
         }
 
       })
       .catch(err => {
         console.log(err);
         $('.error').html(`Something went wrong: ${err.message}.`);
-      
+
       });
-    
+
     // debugger;
     // console.log(jsonData);
     // const localData = JSON.parse(jsonData);
@@ -116,7 +118,7 @@ const submitNewBookmarkEventListener = function () {
 };
 
 const filterBookmarkEventListener = function () {
-  $('#filter-by-raiting').on('click', function (event){
+  $('#filter-by-raiting').on('click', function (event) {
     event.preventDefault();
     let filterValue = $('#filter-by-raiting').val();
     database.STORE.filter = filterValue;
@@ -127,16 +129,16 @@ const filterBookmarkEventListener = function () {
 
 
 
-const cancelNewBookmarkEventListener = function (){
-  $('main').on('click', '#cancel-bookmark', function (event){
+const cancelNewBookmarkEventListener = function () {
+  $('main').on('click', '#cancel-bookmark', function (event) {
     event.preventDefault();
     database.STORE.adding = false;
     render();
   });
 };
 
-const deleteBookmarkEventListener = function() {
-  $('main').on('click', '.delete-bookmark', function (event){
+const deleteBookmarkEventListener = function () {
+  $('main').on('click', '.delete-bookmark', function (event) {
     console.log('delete');
     event.preventDefault();
     const id = getBookmarkIdFromElement(event.currentTarget);
@@ -146,7 +148,7 @@ const deleteBookmarkEventListener = function() {
         database.storeDeleteBookmark(id);
         render();
       });
-      
+
   });
 };
 
@@ -158,11 +160,11 @@ const eventListeners = function () {
   submitNewBookmarkEventListener();
   cancelNewBookmarkEventListener();
   deleteBookmarkEventListener();
-  
+
 
 };
 
-const app = function (){
+const app = function () {
 
   database.getBookmarks()
     .then(response => response.json())

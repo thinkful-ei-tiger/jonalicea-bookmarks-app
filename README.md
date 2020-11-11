@@ -2,7 +2,7 @@
 
 Front End Bookmarking APP that utilizes a RESTful Web API on the backend. Made with jQuery, Javascript, HTML5, CSS.
 
-Live: https://thinkful-ei-tiger.github.io/jonalicea-bookmarks-app/dist/
+Live: https://thinkful-ei-tiger.github.io/jonalicea-bookmarks-app/
 
 ## STACK
 - normalize.css

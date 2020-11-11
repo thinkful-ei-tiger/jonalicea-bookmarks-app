@@ -89,14 +89,12 @@ const submitNewBookmarkEventListener = function () {
       })
       .then((newBookmark) => {
         if (newBookmark.message) {
-          $('.error').addClass('.error-show');
           $('.error').html(
             `Something went wrong:
             "Enter Title" and  "Enter url" Required. Please Use http:// or https:// on "Enter Url"`
           );
           console.log(newBookmark.message)
         } else {
-          $('.error').toggle('.error-show')
           database.addBookmarks(newBookmark);
           render();
         }

@@ -46,10 +46,10 @@ const addNewBookmarkTemplateView = function (){
                           <form class="add-new-bookmark">
                               <div class="error error-show"></div>
                               <label class="hide-label" for="title">Enter Title</label>
-                              <!-- <input type="text" title="Enter Title" name="title" id="title" placeholder="Enter Title" pattern="[a-zA-Z0-9_]+.*$" minlength="1" required> -->
+                              <!-- <input type="text" title="Enter Title" name="title" id="title" placeholder="Enter Title"> -->
                               <input type="text" title="Enter Title" name="title" id="title" placeholder="Enter Title">
                               <label class="hide-label" for="url">Enter URL</label>
-                              <!-- <input type="text" title="Enter URL" name="url" value="https://" id="url" placeholder="https://website.com" pattern="https://.*|http://.*"  minlength="5" required> -->
+                              <!-- <input type="text" title="Enter URL" name="url" value="https://" id="url" placeholder="https://website.com"> -->
                               <input type="text" title="Enter URL" name="url" value="https://" id="url" placeholder="https://website.com">
                               <label class="hide-label" for="desc">Enter Description</label>
                               <textarea title="Enter Description" name="desc" id="desc" placeholder="Enter Description"></textarea>
